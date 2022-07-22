@@ -1946,7 +1946,7 @@ func TestParseReference(t *testing.T) {
 
 	t.Parallel()
 
-	result, errs := ParseExpression("& t", nil)
+	result, errs := ParseExpression("& t as T", nil)
 	require.Empty(t, errs)
 
 	utils.AssertEqualWithDiff(t,
@@ -1958,6 +1958,12 @@ func TestParseReference(t *testing.T) {
 				},
 			},
 			StartPos: ast.Position{Line: 1, Column: 0, Offset: 0},
+			Type: &ast.NominalType{
+				Identifier: ast.Identifier{
+					Identifier: "T",
+					Pos:        ast.Position{Line: 1, Column: 7, Offset: 7},
+				},
+			},
 		},
 		result,
 	)

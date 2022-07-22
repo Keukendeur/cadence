@@ -6394,7 +6394,33 @@ func TestCheckStaticCastElaboration(t *testing.T) {
 
 			require.NoError(t, err)
 
-			require.Len(t, checker.Elaboration.StaticCastTypes, 1)
+			require.Len(t, checker.Elaboration.StaticCastTypes, 0)
+		})
+
+		t.Run("Reference, with type, invalid operator as!", func(t *testing.T) {
+			t.Parallel()
+
+			checker, err := ParseAndCheckWithAny(t, `
+                let x = false
+                let y = &x as! &Bool
+            `)
+
+			require.NoError(t, err)
+
+			require.Len(t, checker.Elaboration.StaticCastTypes, 0)
+		})
+
+		t.Run("Reference, with type, invalid operator as?", func(t *testing.T) {
+			t.Parallel()
+
+			checker, err := ParseAndCheckWithAny(t, `
+                let x = false
+                let y = &x as? &Bool
+            `)
+
+			require.NoError(t, err)
+
+			require.Len(t, checker.Elaboration.StaticCastTypes, 0)
 		})
 
 		t.Run("Reference, with type", func(t *testing.T) {
@@ -6407,7 +6433,7 @@ func TestCheckStaticCastElaboration(t *testing.T) {
 
 			require.NoError(t, err)
 
-			require.Len(t, checker.Elaboration.StaticCastTypes, 1)
+			require.Len(t, checker.Elaboration.StaticCastTypes, 0)
 		})
 
 		t.Run("Conditional expr valid", func(t *testing.T) {
