@@ -218,8 +218,7 @@ The inputs to `verify` depend on the signature scheme used:
   - `domainSeparationTag` is the expected domain tag. Multiple valid tag values can be used (check [`hashWithTag`](#hashing) for more details).
   - `hashAlgorithm` is either `SHA2_256`, `SHA3_256` or `KECCAK_256`. It is the algorithm used to hash the message along with the given tag (check the `hashWithTag`[function](#hashing) for more details).
 
-As noted in [`hashWithTag`](#hashing) for `SHA2_256`, `SHA3_256` and `KECCAK_256, using an empty `tag` results in hashing the input data only. If a signature verification
-needs to be done against data without any domain tag, this can be done by using an empty domain tag `""`.
+As noted in [`hashWithTag`](#hashing) for `SHA2_256`, `SHA3_256` and `KECCAK_256`, using an empty `tag` results in hashing the input data only. If a signature verification needs to be done against data without any domain tag, this can be done by using an empty domain tag `""`.
 
 ECDSA verification is implemented as defined in ANS X9.62 (also referred by [FIPS 186-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf) and [SEC 1, Version 2.0](https://www.secg.org/sec1-v2.pdf)).
 A valid signature would be generated using the expected `signedData`, `domainSeparationTag` and `hashAlgorithm` used to verify. 
